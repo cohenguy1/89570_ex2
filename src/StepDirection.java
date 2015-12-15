@@ -2,7 +2,7 @@
 public enum StepDirection
 {
 	R,
-	RD ,
+	RD,
 	D,
 	LD,
 	L,

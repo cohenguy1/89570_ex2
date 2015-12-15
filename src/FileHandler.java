@@ -15,11 +15,7 @@ public class FileHandler
 		fileReader = new FileReader(inputFileName);
 		
 		BufferedReader reader = new BufferedReader(fileReader);
-		
-		// read line of algorithm
-		String algorithm = reader.readLine();
-		SetSearchAlgorithm(algorithm, mapToSolve);
-		
+				
 		// read line of map size
 		String dimension = reader.readLine();
 		SetMapDimension(dimension, mapToSolve);
@@ -29,21 +25,6 @@ public class FileHandler
 		reader.close();
 		
 		return mapToSolve;
-	}
-	
-	/*
-	 * Sets the search algorithm according to the string in the input file
-	 */
-	private void SetSearchAlgorithm(String algorithm, Infrastructure infrastructure)
-	{
-		if (algorithm.equals("IDS"))
-		{
-			infrastructure.SearchAlgo = SearchAlgorithm.IDS;
-		}
-		else if (algorithm.equals("UCS"))
-		{
-			infrastructure.SearchAlgo = SearchAlgorithm.UCS;
-		}
 	}
 	
 	/*
@@ -82,10 +63,7 @@ public class FileHandler
 		}
 	}
 
-	/*
-	 * Writes the result (path or no-path)
-	 */
-	public void WriteResult(String outputFileName, PathResult pathResult) throws IOException
+	public void WriteResult(String outputFileName, Policy policy) throws IOException
 	{
 		FileWriter fileWriter;
 		
@@ -93,53 +71,10 @@ public class FileHandler
 		
 		BufferedWriter writer = new BufferedWriter(fileWriter);
 		
-		if (!pathResult.pathExists)
-		{
-			writer.write("no path");
-		}
-		else
-		{
-			// Retrieve path cost
-			int pathCost = GetPathCost(pathResult.resultPath);
-			
-			PrintPath(writer, pathResult.resultPath);
-			
-			writer.write(" ");
-			
-			// Print path cost
-			writer.write(Integer.toString(pathCost));
-		}
 		
 		writer.close();
 	}
 	
-	private void PrintPath(BufferedWriter writer, Deque<PathStep> path) throws IOException
-	{
-		PathStep startLocation = new PathStep(0, 0);
-		
-		// until the path stack is empty
-		while (!path.isEmpty())
-		{
-			PathStep pathStep = path.removeFirst();
-
-			// path location has no stepped from, skip it
-			if (!pathStep.equals(startLocation))
-			{
-				// Get how we stepped into the location
-				String stepString = GetStepString(pathStep.GetSteppedFrom());
-				
-				// print the step
-				writer.write(stepString);
-				
-				// in case we have another step
-				if (!path.isEmpty())
-				{
-					writer.write("-");
-				}
-			}
-		
-		}
-	}
 	
 	private String GetStepString(StepDirection step)
 	{
@@ -164,15 +99,5 @@ public class FileHandler
 		}
 		
 		return "";
-	}
-
-	/*
-	 * Gets the path cost from the goal cost (first location in the stack)
-	 */
-	private int GetPathCost(Deque<PathStep> path)
-	{
-		PathStep goalStep = path.peekLast();
-		
-		return goalStep.GetCostToLocation();
 	}
 }
