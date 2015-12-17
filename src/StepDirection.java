@@ -8,5 +8,6 @@ public enum StepDirection
 	L,
 	LU,
 	U,
-	RU
+	RU,
+	NotAvailable
 }

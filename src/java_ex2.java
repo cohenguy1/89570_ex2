@@ -16,7 +16,7 @@ public class java_ex2
 			Policy policy = policyFinder.FindPolicy(map);
 			
 			String outputFilePath = "output.txt";
-			fileHandler.WriteResult(outputFilePath, policy);
+			fileHandler.WriteResult(outputFilePath, policy, map);
 		}
 		catch (IOException ex)
 		{

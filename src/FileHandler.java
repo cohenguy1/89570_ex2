@@ -63,7 +63,7 @@ public class FileHandler
 		}
 	}
 
-	public void WriteResult(String outputFileName, Policy policy) throws IOException
+	public void WriteResult(String outputFileName, Policy policy, Infrastructure map) throws IOException
 	{
 		FileWriter fileWriter;
 		
@@ -71,11 +71,34 @@ public class FileHandler
 		
 		BufferedWriter writer = new BufferedWriter(fileWriter);
 		
+		boolean firstLine = true;
+		
+		for (int row = 0; row < map.Size; row++)
+		{
+			for (int column = 0; column < map.Size; column++)
+			{
+				if (map.Map[row][column] != 'W' && map.Map[row][column] != 'G')
+				{
+					if (!firstLine)
+					{
+						writer.newLine();
+					}
+					
+					WritePolicyForLocation(writer, row, column, policy);
+					firstLine = false;
+				}
+			}
+		}
 		
 		writer.close();
 	}
 	
 	
+	private void WritePolicyForLocation(BufferedWriter writer, int row, int column, Policy policy) throws IOException 
+	{
+		writer.write(row + "," + column + "," + GetStepString(policy.Action[row][column]));
+	}
+
 	private String GetStepString(StepDirection step)
 	{
 		switch (step)
@@ -96,6 +119,8 @@ public class FileHandler
 			return "U";
 		case RU:
 			return "RU";
+		case NotAvailable:
+			return "";
 		}
 		
 		return "";
