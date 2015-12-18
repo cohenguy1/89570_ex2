@@ -79,6 +79,7 @@ public class FileHandler
 		{
 			for (int column = 0; column < map.Size; column++)
 			{
+				// No policy exists in W and G locations
 				if (map.Map[row][column] != 'W' && map.Map[row][column] != 'G')
 				{
 					if (!firstLine)
