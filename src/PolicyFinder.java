@@ -6,14 +6,12 @@ public class PolicyFinder
 
 	public Policy FindPolicy(Infrastructure map)
 	{
-		int count = 0;
 		Policy initialPolicy = new Policy(map.Size);
 
 		Policy nextIterationPolicy = new Policy(map.Size);
 
 		do
 		{
-			count++;
 			initialPolicy.Set(nextIterationPolicy);
 
 			for (int row = 0; row < map.Size; row++)
@@ -29,6 +27,7 @@ public class PolicyFinder
 				}
 			}
 
+			// repeat until the next policy is identical to this one
 		} while (!Policy.PoliciesIdentical(initialPolicy, nextIterationPolicy));
 
 		return initialPolicy;

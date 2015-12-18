@@ -1,8 +1,10 @@
 
 public class Policy 
 {
+	// Action for each map location
 	StepDirection Action[][];
 
+	// Reward for each map location
 	double Reward[][];
 
 	int MapSize;
@@ -16,6 +18,9 @@ public class Policy
 		Reward = new double[MapSize][MapSize];
 	}
 
+	/*
+	 * Copies policy from other policy to our policy
+	 */
 	public void Set(Policy otherPolicy) 
 	{
 		for (int row = 0; row < MapSize; row++)
@@ -29,6 +34,9 @@ public class Policy
 
 	}
 
+	/*
+	 * Compares two policies and returns true if they are identical
+	 */
 	public static boolean PoliciesIdentical(Policy policy1, Policy policy2) 
 	{
 		for (int row = 0; row < policy1.MapSize; row++)

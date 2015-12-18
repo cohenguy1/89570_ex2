@@ -9,7 +9,6 @@ public class FileHandler
 	
 	public Infrastructure ParseFile(String inputFileName) throws IOException
 	{
-		Infrastructure mapToSolve = new Infrastructure();
 		FileReader fileReader;
 		
 		fileReader = new FileReader(inputFileName);
@@ -18,7 +17,7 @@ public class FileHandler
 				
 		// read line of map size
 		String dimension = reader.readLine();
-		SetMapDimension(dimension, mapToSolve);
+		Infrastructure mapToSolve = CreateMap(dimension);
 		
 		ReadMap(reader, mapToSolve);
 		
@@ -30,12 +29,16 @@ public class FileHandler
 	/*
 	 * Sets map dimension and creates the map by its dimension
 	 */
-	private void SetMapDimension(String dimension, Infrastructure infrastructure)
+	private Infrastructure CreateMap(String dimension)
 	{
-		infrastructure.Size = Integer.parseInt(dimension);
+		Infrastructure mapToSolve = new Infrastructure();
+		
+		mapToSolve.Size = Integer.parseInt(dimension);
 		
 		// Create the map
-		infrastructure.Map = new char[infrastructure.Size][infrastructure.Size];
+		mapToSolve.Map = new char[mapToSolve.Size][mapToSolve.Size];
+		
+		return mapToSolve;
 	}
 	
 	/*
@@ -63,6 +66,9 @@ public class FileHandler
 		}
 	}
 
+	/*
+	 * Writes the policy of the map to the output file
+	 */
 	public void WriteResult(String outputFileName, Policy policy, Infrastructure map) throws IOException
 	{
 		FileWriter fileWriter;
