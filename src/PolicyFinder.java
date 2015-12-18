@@ -20,9 +20,7 @@ public class PolicyFinder
 				{
 					if (map.Map[row][column] != 'W' && map.Map[row][column] != 'G')
 					{
-						MapLocation mapLocation = new MapLocation(row, column);
-
-						FindBestAction(map, mapLocation, initialPolicy, nextIterationPolicy);
+						FindBestAction(map, map.MapLocations[row][column], initialPolicy, nextIterationPolicy);
 					}
 				}
 			}

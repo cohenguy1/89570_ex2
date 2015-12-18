@@ -31,12 +31,8 @@ public class FileHandler
 	 */
 	private Infrastructure CreateMap(String dimension)
 	{
-		Infrastructure mapToSolve = new Infrastructure();
-		
-		mapToSolve.Size = Integer.parseInt(dimension);
-		
-		// Create the map
-		mapToSolve.Map = new char[mapToSolve.Size][mapToSolve.Size];
+		int mapSize = Integer.parseInt(dimension);
+		Infrastructure mapToSolve = new Infrastructure(mapSize);
 		
 		return mapToSolve;
 	}
