@@ -16,6 +16,8 @@ public class Infrastructure
 		// Create the map
 		Map = new char[Size][Size];		
 		
+		MapLocations = new MapLocation[Size][Size];
+		
 		for (int row = 0; row < Size; row++)
 		{
 			for (int column = 0; column < Size; column++)
